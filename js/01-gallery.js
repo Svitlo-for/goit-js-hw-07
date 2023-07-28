@@ -3,7 +3,6 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 
 const galleryBox = document.querySelector(".gallery");
-console.log(galleryBox);
 
 const galleryFoto = galleryItems.map(url => `
 <li class="gallery__item">
@@ -19,3 +18,18 @@ const galleryFoto = galleryItems.map(url => `
 `).join("");
 
 galleryBox.insertAdjacentHTML('beforeend', galleryFoto);
+galleryBox.addEventListener("click", originalFoto);
+
+function originalFoto(event) {
+  event.preventDefault();
+  if (event.target.classList.contains("gallery")) {
+    return;
+  }
+  const src = event.target.dataset.source;
+  const instance = basicLightbox.create(`
+    <img src="${src}" width="960">
+`)
+
+instance.show();
+}
+
