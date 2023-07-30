@@ -1,6 +1,5 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-console.log(galleryItems);
 
 const galleryBox = document.querySelector(".gallery");
 
@@ -29,7 +28,12 @@ function originalFoto(event) {
   const instance = basicLightbox.create(`
     <img src="${src}" width="960">
 `)
-
 instance.show();
+
+galleryBox.addEventListener("keydown", (event) => {
+  if (event.code === "Escape") {
+    instance.close();
+  }
+})
 }
 
